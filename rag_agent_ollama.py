@@ -6,7 +6,7 @@ from phi.embedder.base import Embedder
 import requests
 
 class OllamaEmbedder(Embedder):
-    def __init__(self, model_name="llama3.2:3b"):
+    def __init__(self, model_name="llama3.1:latest"):
         super().__init__()
         self._model_name = model_name
         self._api_base = "http://localhost:11434"
@@ -37,7 +37,7 @@ class OllamaEmbedder(Embedder):
         return embedding, usage
 
 # Create the embedder
-embedder = OllamaEmbedder(model_name="llama3.2:3b")
+embedder = OllamaEmbedder(model_name="nomic-embed-text")
 
 # Create a knowledge base from a PDF
 knowledge_base = PDFUrlKnowledgeBase(
@@ -53,7 +53,7 @@ knowledge_base = PDFUrlKnowledgeBase(
 knowledge_base.load()
 
 agent = Agent(
-    model=Ollama(id="llama3.2:3b"),
+    model=Ollama(id="llama3.1:latest"),
     knowledge=knowledge_base,
     show_tool_calls=True,
     markdown=True,
